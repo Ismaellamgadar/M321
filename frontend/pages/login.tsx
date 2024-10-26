@@ -3,10 +3,11 @@
 import React, { useState } from "react";
 import { Button, Input, Checkbox, Link } from "@nextui-org/react";
 import { Icon } from "@iconify/react";
-import { useRouter } from "next/navigation"; // useRouter für die Navigation nach dem Login
+import { useRouter } from "next/navigation";
+
 
 export default function Component() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isVisible, setIsVisible] = useState(false);
   const [error, setError] = useState("");
@@ -23,7 +24,7 @@ export default function Component() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ username, password }),
     });
 
     if (res.ok) {
@@ -42,13 +43,13 @@ export default function Component() {
         <p className="pb-2 text-xl font-medium">Log In</p>
         <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
           <Input
-            label="Email Address"
-            name="email"
-            placeholder="Enter your email"
-            type="email"
+            label="Username"
+            name="username"
+            placeholder="Enter your username"
+            type="text"
             variant="bordered"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <Input
             endContent={
