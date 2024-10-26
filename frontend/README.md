@@ -1,3 +1,8 @@
+## TO-DO
+
+### Ismael
+Es het in ```pages/api/auth/``` es login und logout .ts file dete anstatt einfach hardcoded test verwende mit IF musch dini API ahbinden ok.
+
 ## Setup
 ### Install dependencies
 
