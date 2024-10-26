@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { Button, Image } from "@nextui-org/react";
 import { cn } from "@nextui-org/react";
@@ -21,7 +19,7 @@ export type ProductListItemProps = Omit<
 
 const ProductListItem = React.forwardRef<HTMLDivElement, ProductListItemProps>(
   ({ name, price, description, image, author, className, ...props }, ref) => {
-    const { addToCart } = useCart(); // Access the addToCart function from CartContext
+    const { addToCart } = useCart();
 
     const handleAddToCart = () => {
       const product = { name, price, description, image, author };
@@ -70,7 +68,7 @@ const ProductListItem = React.forwardRef<HTMLDivElement, ProductListItemProps>(
             color="primary"
             radius="lg"
             variant="solid"
-            onClick={handleAddToCart} // Add to cart when button is clicked
+            onClick={handleAddToCart}
           >
             Add to cart
           </Button>

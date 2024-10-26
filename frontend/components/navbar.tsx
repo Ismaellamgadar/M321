@@ -5,12 +5,15 @@ import {
   NavbarItem,
   Link,
   Button,
+  Badge,
 } from "@nextui-org/react";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
+import { useCart } from "@/context/cart";
 
 export default function BookstoreNavbar() {
   const router = useRouter();
+  const { cartCount, cartAnimate } = useCart();
 
   const handleLogout = async () => {
     try {
@@ -35,7 +38,6 @@ export default function BookstoreNavbar() {
       </NavbarBrand>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        {" "}
         <NavbarItem>
           <Link color="foreground" href="/">
             Home
@@ -52,7 +54,20 @@ export default function BookstoreNavbar() {
           </NavbarItem>
           <NavbarItem>
             <Button as={Link} href="/cart" color="primary">
-              <Icon icon="mdi:cart-outline" width="24" height="24" />
+              <Badge
+                color="success"
+                content={cartCount}
+                size="sm"
+                variant="shadow"
+                disableOutline={true}
+              >
+                <Icon
+                  icon="mdi:cart-outline"
+                  width="24"
+                  height="20"
+                  className={cartAnimate ? "animate-shake" : ""}
+                />
+              </Badge>
             </Button>
           </NavbarItem>
         </>
