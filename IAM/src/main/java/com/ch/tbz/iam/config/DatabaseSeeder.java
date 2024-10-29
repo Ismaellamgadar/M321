@@ -19,7 +19,7 @@ public class DatabaseSeeder {
                 admin.setPassword("password");
                 admin.setRole("ADMIN");
                 userRepository.save(admin);
-                System.out.println("Admin user created: " + userRepository.findByUsername("admin").isPresent());
+                System.out.println("user 'admin' created: " + userRepository.findByUsername("admin").isPresent());
             }
         };
     }

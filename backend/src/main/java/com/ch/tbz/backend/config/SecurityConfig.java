@@ -1,4 +1,4 @@
-package com.ch.tbz.iam.config;
+package com.ch.tbz.backend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,14 +16,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/auth/login").permitAll()
-                        .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/api-docs/**").permitAll()
                         .requestMatchers("swagger-ui/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/auth/login", "/h2-console/**", "/api-docs/**", "swagger-ui/**")
+                        .ignoringRequestMatchers("/api-docs/**", "swagger-ui/**")
                 )
                 .headers(headers -> headers
                         .frameOptions().sameOrigin()
@@ -38,10 +36,9 @@ public class SecurityConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000") // Replace with your frontend origin
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
-                        .allowCredentials(false); // Set to false for testing
+                        .allowCredentials(false);
             }
         };
     }
