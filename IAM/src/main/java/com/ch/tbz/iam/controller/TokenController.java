@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -22,7 +23,8 @@ public class TokenController {
     private UserRepository userRepository;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserCredentials credentials) {
+    public ResponseEntity<?> login(@RequestBody UserCredentials credentials) {
+        System.out.println("lol");
         Optional<AppUser> userOptional = userRepository.findByUsername(credentials.getUsername());
 
         if (userOptional.isPresent()) {
@@ -31,12 +33,16 @@ public class TokenController {
             if (appUser.getPassword().equals(credentials.getPassword())) {
                 String token = jwtUtil.generateToken(appUser.getUsername());
 
-                return ResponseEntity.ok(token);
+                // Return token wrapped in a JSON object
+                return ResponseEntity.ok(Map.of("token", token));
             }
         }
 
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+        // Return an error message wrapped in a JSON object
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(Map.of("message", "Invalid username or password"));
     }
+
 
     // backend will call this endpoint to check if token is valid
     @GetMapping("/validate")

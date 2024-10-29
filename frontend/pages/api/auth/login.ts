@@ -13,9 +13,9 @@ export default async function loginHandler(
       const response = await fetch(IAM_SERIVCE_URL, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username: username, password: password }),
+        body: JSON.stringify({ username, password }),
       });
 
       if (response.ok) {
@@ -25,14 +25,20 @@ export default async function loginHandler(
 
         return res.status(200).json({ message: "Login erfolgreich" });
       } else {
-        const errorData = await response.json();
-        return res.status(401).json({ message: errorData.message || "Ungültige Anmeldeinformationen" });
+        let errorData = {};
+        try {
+          errorData = await response.json();
+        } catch (err) {
+          console.warn("Non-JSON response received from IAM service:", err);
+          errorData = { message: "Ungültige Anmeldeinformationen" };
+        }
+        console.error("IAM service error:", errorData);
+        return res.status(401).json({ message: errorData.message });
       }
     } catch (error) {
       console.error("Error during IAM service call:", error);
       return res.status(500).json({ message: "Server error during login" });
     }
-
   } else {
     res.setHeader("Allow", ["POST"]);
     return res
