@@ -17,14 +17,14 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/login").permitAll()
-                        .requestMatchers("/h2-console/**").permitAll() // Allow access to H2 console
-                        .anyRequest().authenticated() // Require authentication for other requests
+                        .requestMatchers("/h2-console/**").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/h2-console/**") // Disable CSRF for H2 console
+                        .ignoringRequestMatchers("/auth/login", "/h2-console/**")
                 )
                 .headers(headers -> headers
-                        .frameOptions().sameOrigin() // Allow framing from the same origin
+                        .frameOptions().sameOrigin()
                 );
 
         return http.build();
@@ -36,10 +36,10 @@ public class SecurityConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("*")
+                        .allowedOrigins("http://localhost:3000") // Replace with your frontend origin
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
-                        .allowCredentials(true);
+                        .allowCredentials(false); // Set to false for testing
             }
         };
     }
