@@ -16,12 +16,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/auth/login", "/h2-console/**")
+                        .ignoringRequestMatchers("/auth/**", "/h2-console/**")
                 )
                 .headers(headers -> headers
                         .frameOptions().sameOrigin()
