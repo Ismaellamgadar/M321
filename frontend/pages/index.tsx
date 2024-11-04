@@ -1,6 +1,8 @@
 import DefaultLayout from "@/layouts/default";
 import ProductListItem from "@/components/product-list-item";
 
+const BACKEND_URL = process.env.BACKEND_URL!
+
 interface Book {
   name: string;
   price: string;
@@ -22,10 +24,10 @@ export async function getServerSideProps(context: { req: any }) {
     };
   }
 
-  const response = await fetch("http://localhost:8080/books", {
+  const response = await fetch(BACKEND_URL + "/books", {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${token}`, 
+      Authorization: `Bearer ${token}`,
     },
   });
 
@@ -37,7 +39,7 @@ export async function getServerSideProps(context: { req: any }) {
     };
   }
 
-  const books = await response.json(); 
+  const books = await response.json();
 
   return {
     props: {
@@ -46,7 +48,7 @@ export async function getServerSideProps(context: { req: any }) {
   };
 }
 
-const Home = ({ books }: { books: Book[]}) => {
+const Home = ({ books }: { books: Book[] }) => {
   return (
     <DefaultLayout>
       <div className="container mx-auto px-4 py-6">

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.ch.tbz</groupId>
 	<artifactId>backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1-GOAT</version>
 	<name>backend</name>
 	<description>backend for module 321</description>
 	<url/>
