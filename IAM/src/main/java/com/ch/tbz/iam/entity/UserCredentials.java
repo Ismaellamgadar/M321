@@ -1,5 +1,8 @@
 package com.ch.tbz.iam.entity;
 
+import lombok.Getter;
+
+@Getter
 public class UserCredentials {
     private final String username;
     private final String password;
@@ -9,11 +12,4 @@ public class UserCredentials {
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
 }

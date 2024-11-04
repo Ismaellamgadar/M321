@@ -1,0 +1,21 @@
+services:
+  backend:
+    container_name: backend
+    build: ../backend
+    ports:
+      - "8080:8080"
+  iam:
+    container_name: iam
+    build: ../IAM
+    ports:
+      - "8081:8081"
+  frontend:
+    container_name: frontend
+    build:
+      dockerfile: ../frontend/Dockerfile
+      context: ../frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - IAM_SERVICE_URL=http://iam:8081/auth/login
+      - BACKEND_URL=http://backend:8080

@@ -18,10 +18,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/api-docs/**").permitAll()
+                        .requestMatchers("swagger-ui/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/auth/**", "/h2-console/**")
+                        .ignoringRequestMatchers("/auth/login", "/h2-console/**", "/api-docs/**", "swagger-ui/**")
                 )
                 .headers(headers -> headers
                         .frameOptions().sameOrigin()

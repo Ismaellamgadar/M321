@@ -1,6 +1,5 @@
 package com.ch.tbz.backend.config;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,15 +16,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/api-docs/**").permitAll()
                         .requestMatchers("/**").permitAll()
-                        .requestMatchers("/h2-console/**").permitAll() // Allow access to H2 console
-                        .anyRequest().authenticated() // Require authentication for other requests
+                        .requestMatchers("swagger-ui/**").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/h2-console/**") // Disable CSRF for H2 console
+                        .ignoringRequestMatchers("/api-docs/**", "swagger-ui/**")
                 )
                 .headers(headers -> headers
-                        .frameOptions().sameOrigin() // Allow framing from the same origin
+                        .frameOptions().sameOrigin()
                 );
 
         return http.build();
