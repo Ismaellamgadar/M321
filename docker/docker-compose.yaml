@@ -19,3 +19,10 @@ services:
     environment:
       - IAM_SERVICE_URL=http://iam:8081/auth/login
       - BACKEND_URL=http://backend:8080
+  monitoring:
+    container_name: monitoring
+    build:
+      dockerfile: ../monitoring/Dockerfile
+      context: ../monitoring
+    ports:
+      - "3000:3001"
