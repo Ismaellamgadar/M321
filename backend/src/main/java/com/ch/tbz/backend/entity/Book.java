@@ -6,7 +6,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @Getter
@@ -18,6 +21,9 @@ public class Book {
         this.image = image;
         this.author = author;
         this.description = description;
+    }
+
+    public Book() {
     }
 
     @Id

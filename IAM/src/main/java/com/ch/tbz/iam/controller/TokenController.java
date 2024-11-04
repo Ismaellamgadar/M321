@@ -24,7 +24,6 @@ public class TokenController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserCredentials credentials) {
-        System.out.println("lol");
         Optional<AppUser> userOptional = userRepository.findByUsername(credentials.getUsername());
 
         if (userOptional.isPresent()) {
