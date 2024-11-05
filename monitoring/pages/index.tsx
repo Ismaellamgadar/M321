@@ -70,9 +70,7 @@ const Dashboard = ({ books }: { books: Book[] }) => {
                   Total Books
                 </Typography>
                 <Typography variant="h4" component="div" align="center">
-                  <layflags-rolling-number>
-                    {totalBooks}
-                  </layflags-rolling-number>
+                  {totalBooks}
                 </Typography>
               </CardBody>
             </Card>
@@ -84,20 +82,13 @@ const Dashboard = ({ books }: { books: Book[] }) => {
                   Average Price
                 </Typography>
                 <Typography variant="h4" component="div" align="center">
-                  <layflags-rolling-number>
-                    {averagePrice}
-                  </layflags-rolling-number>
+                  {averagePrice}
                 </Typography>
               </CardBody>
             </Card>
           </Grid>
         </Grid>
       </div>
-      <script
-        type="module"
-        src="https://unpkg.com/@layflags/rolling-number@1.0.0/rolling-number.js"
-      ></script>
-
       <style>{`
         .dashboard-container {
           padding: 2rem;

@@ -33,7 +33,7 @@ export default async function loginHandler(
           errorData = { message: "Ungültige Anmeldeinformationen" };
         }
         console.error("IAM service error:", errorData);
-        return res.status(401).json({ message: errorData.message });
+        return res.status(401).json({ message: errorData });
       }
     } catch (error) {
       console.error("Error during IAM service call:", error);
