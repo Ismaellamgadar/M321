@@ -1,0 +1,48 @@
+name: Build and Test backend and IAM
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test-project1:
+    runs-on: ubuntu-latest
+    name: Build and Test backend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build and test project1
+        working-directory: ./backend
+        run: |
+          ./mvnw clean install
+          ./mvnw test
+
+  build-and-test-project2:
+    runs-on: ubuntu-latest
+    name: Build and Test IAM
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build and test IAM
+        working-directory: ./IAM
+        run: |
+          ./mvnw clean install
+          ./mvnw test
