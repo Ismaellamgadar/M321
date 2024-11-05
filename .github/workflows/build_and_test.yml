@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  build-and-test-project1:
+  build-and-test-backend:
     runs-on: ubuntu-latest
     name: Build and Test backend
     steps:
@@ -28,7 +28,7 @@ jobs:
           mvn clean install
           mvn test
 
-  build-and-test-project2:
+  build-and-test-iam:
     runs-on: ubuntu-latest
     name: Build and Test IAM
     steps:
@@ -44,5 +44,5 @@ jobs:
       - name: Build and test IAM
         working-directory: ./IAM
         run: |
-          mvnw clean install
-          mvnw test
+          mvn clean install
+          mvn test
