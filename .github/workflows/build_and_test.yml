@@ -25,8 +25,8 @@ jobs:
       - name: Build and test project1
         working-directory: ./backend
         run: |
-          ./mvnw clean install
-          ./mvnw test
+          mvn clean install
+          mvn test
 
   build-and-test-project2:
     runs-on: ubuntu-latest
@@ -44,5 +44,5 @@ jobs:
       - name: Build and test IAM
         working-directory: ./IAM
         run: |
-          ./mvnw clean install
-          ./mvnw test
+          mvnw clean install
+          mvnw test
