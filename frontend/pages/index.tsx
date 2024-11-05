@@ -1,7 +1,7 @@
 import DefaultLayout from "@/layouts/default";
 import ProductListItem from "@/components/product-list-item";
 
-const BACKEND_URL = process.env.BACKEND_URL!
+const BACKEND_URL = "http://localhost:8080";
 
 interface Book {
   name: string;

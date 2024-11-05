@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-const IAM_SERIVCE_URL = "http://localhost:8081/auth/login";
+const IAM_SERIVCE_URL = process.env.IAM_SERVICE_URL! || "http://localhost:8081";
 
 export default async function loginHandler(
   req: NextApiRequest,
@@ -10,7 +10,7 @@ export default async function loginHandler(
     const { username, password } = req.body;
 
     try {
-      const response = await fetch(IAM_SERIVCE_URL, {
+      const response = await fetch(IAM_SERIVCE_URL + "/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,7 +33,7 @@ export default async function loginHandler(
           errorData = { message: "Ungültige Anmeldeinformationen" };
         }
         console.error("IAM service error:", errorData);
-        return res.status(401).json({ message: errorData.message });
+        return res.status(401).json({ message: errorData || "Error" });
       }
     } catch (error) {
       console.error("Error during IAM service call:", error);
